@@ -12,17 +12,30 @@ namespace FileSystemTest
             Console.Read(); // forces the console to stay open
         }
 
+        public string[] folders =
+        {
+            // dont start with a \ because that means "the root of a dir", and we dont know where root exists
+            @"Workspace\", // paths as strings, use @ before string, will convert the characters to unicode, dont have to escape
+            @"Workspace\Archive\",
+            @"Workspace\Tmp\"
+        };
+
         public void CreateDirectory()
         {
-            var dirName = "TestFolder";
-            if (Directory.Exists(dirName))
+            var total = folders.Length; // get total number of dirs we want to create
+
+            for(var i = 0; i < total; i++)
             {
-                Console.WriteLine("Dir '" + dirName + "' exists");
-            }
-            else
-            {
-                Directory.CreateDirectory(dirName);
-                Console.WriteLine("Create Dir '" + dirName + "'");
+                var dirName = folders[i];
+                if (Directory.Exists(dirName))
+                {
+                    Console.WriteLine("Dir '" + dirName + "' exists");
+                }
+                else
+                {
+                    Directory.CreateDirectory(dirName);
+                    Console.WriteLine("Create Dir '" + dirName + "'");
+                }
             }
         }
     }
