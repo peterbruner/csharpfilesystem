@@ -10,6 +10,7 @@ namespace FileSystemTest
             var app = new Program();
             app.CreateDirectory(); 
             Console.Read(); // forces the console to stay open
+            app.CopySaveData();
             app.DeleteTmp();
         }
 
@@ -50,6 +51,17 @@ namespace FileSystemTest
                 Directory.Delete(tmpDir, true);
             }
             
+        }
+
+        public void CopySaveData()
+        {
+            var saveDataDir = folders[3];
+
+            if(Directory.Exists(saveDataDir))
+            {
+                var destDirName = folders[1] + "SaveData_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                Directory.Move(saveDataDir, destDirName);
+            }
         }
     }
 }
