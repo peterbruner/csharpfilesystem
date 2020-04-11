@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileSystemTest
 {
@@ -10,6 +6,8 @@ namespace FileSystemTest
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("dir "+args[0]);
+            Console.Read(); // forces the console to stay open
         }
     }
 }
