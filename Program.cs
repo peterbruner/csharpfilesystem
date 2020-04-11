@@ -23,13 +23,21 @@ namespace FileSystemTest
             @"Workspace\Tmp\SaveData\"
         };
 
+        public enum FolderNames
+        {
+            Workspace,
+            Archive,
+            Tmp,
+            SaveData
+        }
+
         public void CreateDirectory()
         {
             var total = folders.Length; // get total number of dirs we want to create
 
             for(var i = 0; i < total; i++)
             {
-                var dirName = folders[i];
+                var dirName = GetFolderByName((FolderNames)i) ;
                 if (Directory.Exists(dirName))
                 {
                     Console.WriteLine("Dir '" + dirName + "' exists");
@@ -44,7 +52,7 @@ namespace FileSystemTest
 
         public void DeleteTmp()
         {
-            var tmpDir = folders[2];
+            var tmpDir = GetFolderByName(FolderNames.Tmp);
             
             if (Directory.Exists(tmpDir))
             {
@@ -55,13 +63,18 @@ namespace FileSystemTest
 
         public void CopySaveData()
         {
-            var saveDataDir = folders[3];
+            var saveDataDir = GetFolderByName(FolderNames.SaveData);
 
             if(Directory.Exists(saveDataDir))
             {
-                var destDirName = folders[1] + "SaveData_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                var destDirName = GetFolderByName(FolderNames.Archive) + "SaveData_" + DateTime.Now.ToString("yyyyMMddHHmmss");
                 Directory.Move(saveDataDir, destDirName);
             }
+        }
+
+        public string GetFolderByName(FolderNames name)
+        {
+            return folders[(int) name];
         }
     }
 }
