@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace FileSystemTest
 {
@@ -6,8 +7,16 @@ namespace FileSystemTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("dir "+args[0]);
+            var app = new Program();
+            app.CreateDirectory(); // running multiple times will overwrite any preexisting instance, since it's an empty dir
             Console.Read(); // forces the console to stay open
+        }
+
+        public void CreateDirectory()
+        {
+            var dirName = "TestFolder";
+
+            Directory.CreateDirectory(dirName);
         }
     }
 }
