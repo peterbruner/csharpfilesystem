@@ -8,7 +8,8 @@ namespace FileSystemTest
         static void Main(string[] args)
         {
             var app = new Program();
-            app.CreateDirectory(); 
+            app.CreateDirectory();
+            app.CreateFile();
             Console.Read(); // forces the console to stay open
             app.CopySaveData();
             app.DeleteTmp();
@@ -75,6 +76,20 @@ namespace FileSystemTest
         public string GetFolderByName(FolderNames name)
         {
             return folders[(int) name];
+        }
+
+        public void CreateFile()
+        {
+            var path = GetFolderByName(FolderNames.SaveData) + "TestFile.txt";
+
+            File.WriteAllText(path, "Hello World");
+
+            var fileInfo = new FileInfo(path);
+            var name = Path.GetFileNameWithoutExtension(fileInfo.FullName);
+            var ext = fileInfo.Extension;
+            var size = fileInfo.Length;
+
+            Console.WriteLine("Created file " + name + " with ext " + ext + " with a size of " + size + " bytes");
         }
     }
 }
