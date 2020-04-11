@@ -10,6 +10,7 @@ namespace FileSystemTest
             var app = new Program();
             app.CreateDirectory(); 
             Console.Read(); // forces the console to stay open
+            app.DeleteTmp();
         }
 
         public string[] folders =
@@ -17,7 +18,8 @@ namespace FileSystemTest
             // dont start with a \ because that means "the root of a dir", and we dont know where root exists
             @"Workspace\", // paths as strings, use @ before string, will convert the characters to unicode, dont have to escape
             @"Workspace\Archive\",
-            @"Workspace\Tmp\"
+            @"Workspace\Tmp\",
+            @"Workspace\Tmp\SaveData\"
         };
 
         public void CreateDirectory()
@@ -37,6 +39,17 @@ namespace FileSystemTest
                     Console.WriteLine("Create Dir '" + dirName + "'");
                 }
             }
+        }
+
+        public void DeleteTmp()
+        {
+            var tmpDir = folders[2];
+            
+            if (Directory.Exists(tmpDir))
+            {
+                Directory.Delete(tmpDir, true);
+            }
+            
         }
     }
 }
