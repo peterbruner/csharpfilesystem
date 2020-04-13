@@ -8,6 +8,7 @@ namespace FileSystemTest
         static void Main(string[] args)
         {
             var app = new Program();
+            app.CreateConfig();
             app.CreateDirectory();
             app.CreateFile();
             Console.Read(); // forces the console to stay open
@@ -23,6 +24,8 @@ namespace FileSystemTest
             @"Workspace\Tmp\",
             @"Workspace\Tmp\SaveData\"
         };
+
+        public string configFile = "Config.txt";
 
         public enum FolderNames
         {
@@ -90,6 +93,14 @@ namespace FileSystemTest
             var size = fileInfo.Length;
 
             Console.WriteLine("Created file " + name + " with ext " + ext + " with a size of " + size + " bytes");
+        }
+
+        public void CreateConfig()
+        {
+            if(!File.Exists(configFile))
+            {
+                File.WriteAllLines(configFile, folders);
+            }
         }
     }
 }
